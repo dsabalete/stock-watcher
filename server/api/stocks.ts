@@ -72,8 +72,7 @@ export default defineEventHandler(async (event) => {
           ? await fetchCompanyInfo(fullSymbol, config.eodhdKey as string)
           : { name: 'Unknown Company', currency: 'USD' };
 
-        // EODHD real-time API uses 'close' as the current price
-        const price = parseFloat(item.close || item.price || 0);
+        const price = parseFloat(item.last || item.close || 0);
         const change = parseFloat(item.change || 0);
         const changePercent = parseFloat(item.change_p || item.change_pct || 0);
 
