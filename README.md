@@ -5,8 +5,8 @@ Real-time stock watchlist built with [Nuxt](https://nuxt.com/) (Vue 3 + Tailwind
 ## Features
 
 - **Watchlist dashboard** — card grid showing symbol, company name, price, currency, and day change/change %.
-- **Add / remove symbols** — type a ticker (e.g. `AAPL`); the `.US` exchange suffix is appended automatically if omitted. Duplicates are rejected.
-- **Persistent watchlist** — saved to `localStorage`; defaults to `AAPL.US, MSFT.US, GOOGL.US, TSLA.US` on first visit.
+- **Add / remove symbols** — type a ticker (e.g. `INTC`); the `.US` exchange suffix is appended automatically if omitted. Duplicates are rejected.
+- **Persistent watchlist** — saved to `localStorage`; defaults to `INTC.US, AMD.US, NVDA.US, DUOL.US` on first visit.
 - **Batch quotes** — a single server endpoint fetches all symbols in one EODHD real-time request.
 - **Company names** — the real-time endpoint returns no names, so the server enriches each quote via the EODHD Search API (with in-memory caching).
 - **Dark UI** — Tailwind-based slate/indigo theme with green/red change indicators.
@@ -34,7 +34,7 @@ cp .env.example .env
 # NUXT_EODHD_KEY=your_eodhd_api_key_here
 ```
 
-> The key lives only in server-side `runtimeConfig` (`nuxt.config.ts`) and is never exposed to the client. `.env` is git-ignored. On Netlify, set `NUXT_EODHD_KEY` under *Site settings → Environment variables*.
+> The key lives only in server-side `runtimeConfig` (`nuxt.config.ts`) and is never exposed to the client. `.env` is git-ignored. On Netlify, set `NUXT_EODHD_KEY` under _Site settings → Environment variables_.
 
 Start the development server on `http://localhost:3000`:
 
@@ -58,25 +58,25 @@ npm run preview
 
 ## API
 
-### `GET /api/stocks?symbols=AAPL.US,MSFT.US`
+### `GET /api/stocks?symbols=INTC.US,AMD.US`
 
 Returns an array of quotes:
 
 ```json
 [
   {
-    "symbol": "AAPL.US",
-    "name": "Apple Inc.",
-    "price": 319.97,
-    "change": -8.24,
-    "changePercent": -2.5106,
+    "symbol": "INTC.US",
+    "name": "Intel Corporation",
+    "price": 95.8,
+    "change": 4.13,
+    "changePercent": 4.5106,
     "currency": "USD",
-    "previousClose": 328.21
+    "previousClose": 91.67
   }
 ]
 ```
 
-- `symbols` (required): comma-separated tickers in `TICKER.EXCHANGE` format (e.g. `AAPL.US`).
+- `symbols` (required): comma-separated tickers in `TICKER.EXCHANGE` format (e.g. `INTC.US`).
 - A single symbol returns a one-element array; unknown/invalid symbols yield `[]`.
 - Company `name`/`currency` come from the EODHD Search API; quotes come from the Real-time API.
 

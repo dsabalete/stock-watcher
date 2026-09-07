@@ -13,11 +13,8 @@
         <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
           <StockSearch @add-stock="handleAddStock" :loading="loading" />
           <div class="flex items-center gap-3">
-            <button
-              @click="refreshAll"
-              :disabled="loading"
-              class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
-            >
+            <button @click="refreshAll" :disabled="loading"
+              class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50">
               Refresh
             </button>
           </div>
@@ -32,17 +29,9 @@
         </div>
 
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <StockCard
-            v-for="stock in stocks"
-            :key="stock.symbol"
-            :stock="stock"
-            :alert-config="alerts[stock.symbol]"
-            @remove="removeStock"
-            @save-alert="saveAlert"
-            @clear-alert="clearAlert"
-            @clear-all-alerts="clearAllAlerts"
-            @edit-alert="editAlert"
-          />
+          <StockCard v-for="stock in stocks" :key="stock.symbol" :stock="stock" :alert-config="alerts[stock.symbol]"
+            @remove="removeStock" @save-alert="saveAlert" @clear-alert="clearAlert" @clear-all-alerts="clearAllAlerts"
+            @edit-alert="editAlert" />
         </div>
       </ClientOnly>
     </div>
@@ -98,7 +87,7 @@ const refreshAll = async () => {
 
 onMounted(async () => {
   if (stocks.value.length === 0) {
-    const defaults = ['AAPL.US', 'MSFT.US', 'GOOGL.US', 'TSLA.US']
+    const defaults = ['INTC.US', 'AMD.US', 'NVDA.US', 'DUOL.US']
     await addStock(defaults[0])
     await addStock(defaults[1])
     await addStock(defaults[2])
